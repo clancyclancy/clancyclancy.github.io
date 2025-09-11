@@ -1,0 +1,43 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Triangulated Navy Mesh</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Background canvas -->
+  <canvas id="bg"></canvas>
+
+  <!--  Content  -->
+<main class="content">
+  <h1 class="centered-name">Michael Clancy</h1>
+  <div class="below-center">
+    <p> Engineer, Artist, Designer</p>
+  </div>
+  <div class="scroll-indicator-wrapper">
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+      <span class="mouse-icon">
+        <svg width="24" height="36" viewBox="0 0 24 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="20" height="32" rx="10" stroke="#ff9400" stroke-width="3" fill="none"/>
+          <circle cx="12" cy="10" r="2" fill="#ff9400"/>
+        </svg>
+      </span>
+      <span class="scroll-text">scroll</span>
+    </div>
+  </div>
+</main>
+<div class="scroll-line-extend"></div>
+<section class="second-screen"></section>
+
+  <!-- Delaunay triangulation library -->
+  <script src="https://unpkg.com/delaunator@5.0.0/delaunator.min.js"></script>
+  <!-- Animation -->
+  <script src="script.js"></script>
+</body>
+</html>
