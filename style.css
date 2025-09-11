@@ -1,0 +1,53 @@
+/* style.css */
+:root {
+  --content-max: 900px;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: transparent; /* fallback */
+}
+
+#bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* Remove width and height here */
+  display: block;
+  z-index: -1;
+}
+
+
+.content {
+  position: relative;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 6rem 1.25rem 8rem;
+  color: #eaeef7;
+  line-height: 1.6;
+}
+
+h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+p {
+  max-width: 60ch;
+  color: #c7d2e8;
+}
+
+.button {
+  display: inline-block;
+  margin-top: 1.25rem;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  color: #0a0f1f;
+  background: #99a9ff;
+  text-decoration: none;
+  font-weight: 600;
+}
