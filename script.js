@@ -4,6 +4,29 @@ console.log("script.js is loaded!");
 console.log("Delaunator is", typeof Delaunator);
 
 window.addEventListener('DOMContentLoaded', () => {
+  const mediaFrame = document.getElementById('grad-media');
+  const coverImg = document.getElementById('grad-cover');
+  const playBtn = document.getElementById('grad-play');
+
+  if (mediaFrame && coverImg && playBtn) {
+    playBtn.addEventListener('click', () => {
+      // Create iframe that fills the same frame as the image
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube.com/embed/0tiTrBepmFs?autoplay=1&rel=0&vq=hd1080&playsinline=1';
+      iframe.title = 'Graduate Research Video';
+      iframe.allow = 'autoplay; encrypted-media';
+      iframe.allowFullscreen = true;
+
+      // Ensure sizing matches the image by using the same CSS selector
+      // (.media-frame iframe shares the same absolute fill styles)
+      mediaFrame.appendChild(iframe);
+
+      // Optionally hide/remove cover and button once video starts
+      coverImg.style.display = 'none';
+      playBtn.style.display = 'none';
+    });
+  }
+
   const canvas = document.getElementById("bg");
   const ctx = canvas.getContext("2d");
   const content = document.querySelector('.content');
@@ -140,6 +163,40 @@ window.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', handleScrollFade);
   handleScrollFade(); // initialize on load
   */
+
+  // Graduate Research Image Switcher
+  const gradImages = [
+    "images/graduate_research/0.PNG",
+    "images/graduate_research/1.PNG"
+  ];
+  let currentGradImage = 0;
+  const gradImageEl = document.getElementById('grad-research-image');
+  if (gradImageEl) {
+    gradImageEl.addEventListener('click', () => {
+      currentGradImage = (currentGradImage + 1) % gradImages.length;
+      gradImageEl.src = gradImages[currentGradImage];
+    });
+  }
+
+  // Video cover play button logic
+  const playButton = document.getElementById('play-button');
+  const videoCover = document.getElementById('video-cover');
+  const videoBox = document.getElementById('grad-research-video-box');
+
+  if (playButton && videoCover && videoBox) {
+    playButton.addEventListener('click', () => {
+      // Replace the cover with the YouTube iframe
+      videoBox.innerHTML = `
+        <iframe width="100%" height="100%" style="border-radius:16px; box-shadow:0 2px 16px rgba(0,0,0,0.12);"
+          src="https://www.youtube.com/embed/0tiTrBepmFs?autoplay=1&rel=0"
+          title="Graduate Research Video"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen>
+        </iframe>
+      `;
+    });
+  }
 
   // ====== ANIMATION LOOP ======
 

@@ -38,7 +38,42 @@
     <div class="scroll-bubble-circle"></div>
     <div class="scroll-bubble-text">Graduate Research</div>
   </div>
-  <!-- ...other content for the second screen... -->
+  <div class="grad-research-content">
+    <div class="grad-research-textbox">
+      <h2></h2>
+      <p>
+        Femur fractures are serious injuries with long recoveries and frequent complications. 
+        My research tackles a key surgical challenge: aligning broken femurs accurately. 
+        I contributed to the development of Robossis, a robotic system built to assist surgeons in femur repair. 
+        Unlike typical robots, Robossis delivers high force and precision, crucial for realigning bone fragments.
+      </p>
+      <p>
+        Using genetic algorithms, I optimized its mechanical design. 
+        Testing showed Robossis achieved just 0.31 mm average error and surpassed clinical standards for motion and force. 
+        This work, published in the ASME Journal of Medical Robotics, advances safer, more effective robotic surgery.
+      </p>
+    </div>
+      <!-- Image/video frame on the right half -->
+    <div class="grad-research-imagebox">
+      <div class="media-frame" id="grad-media">
+        <img
+          src="images/graduate_research/0.PNG"
+          alt="Graduate Research Cover"
+          class="media-cover"
+          id="grad-cover"
+        />
+        <button class="play-button" id="grad-play" aria-label="Play video">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="18" fill="none"/>
+            <!-- Even larger arrow: nearly fills the circle -->
+            <polygon points="10,7 29,18 10,29" fill="#fff"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+      <!-- The YouTube iframe will be injected here on play -->
+    </div>
+  </div>
 </section>
 
   <!-- Delaunay triangulation library -->

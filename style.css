@@ -41,6 +41,10 @@ body {
   font-weight: 800;
   color: #eaeef7;
   z-index: 1;
+  white-space: nowrap;      /* Prevent line breaks */
+  overflow: hidden;         /* Prevents overflow from causing scrollbars */
+  text-overflow: ellipsis;  /* Optional: shows "..." if text is too long */
+  max-width: 100vw;         /* Prevents overflow outside viewport */
 }
 
 .below-center {
@@ -88,7 +92,7 @@ body {
   background: #ff9400;
   border-radius: 2px;
   margin-bottom: 0.5rem;
-  opacity: 0.7;
+  opacity: 1;
 }
 
 .scroll-text {
@@ -97,7 +101,7 @@ body {
   font-size: 1.1rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  opacity: 0.7;
+  opacity: 1;
   writing-mode: vertical-lr;
   text-align: center;
   user-select: none;
@@ -113,7 +117,7 @@ body {
   width: 3px;
   background: #ff9400;
   border-radius: 2px;
-  opacity: 0.7;
+  opacity: 1;
   z-index: 99;
   pointer-events: none;
   margin-top: 1rem; /* Add this line for spacing */
@@ -149,7 +153,7 @@ body {
 .scroll-bubble-container {
   position: fixed;
   left: 12.5vw;
-  top: 20vh; /* Adjust this value to place the bubble vertically */
+  top: 10vh; /* Adjust this value to place the bubble vertically */
   display: flex;
   align-items: center;
   z-index: 200;
@@ -179,3 +183,87 @@ body {
   z-index: 201;
   pointer-events: auto;
 }
+
+.grad-research-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start; /* Align to the left */
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  z-index: 1;
+}
+
+.grad-research-textbox {
+  flex: 1 1 50%;
+  max-width: 40vw;
+  min-width: 250px;
+  margin-left: calc(12.5vw + 16px); /* Add buffer for scroll bubble */
+  margin-right: 2vw;
+  background: transparent;
+  color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  padding: 2rem 2rem;
+  font-family: 'Roboto', Arial, sans-serif;
+  box-sizing: border-box;
+  font-size: 1.25rem;      /* Increase font size */
+  text-align: justify;     /* Full justify the text */
+  margin-top: 6vh; 
+}
+
+.grad-research-imagebox {
+  position: absolute;       /* Center on right half; adjust to your layout */
+  right: 5vw;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(40vw, 900px);  /* This defines how big the image AND video will be */
+  max-height: 70vh;         /* Prevents it from getting too tall */
+}
+
+.media-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;     /* Keeps a consistent frame height without relying on content */
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.12);
+  overflow: hidden;
+  background: transparent;
+}
+
+/* The cover image and the iframe both fill the same frame */
+.media-cover,
+.media-frame iframe {
+  position: absolute;
+  inset: 0;                 /* top:0; right:0; bottom:0; left:0 */
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+  border-radius: 16px;
+  object-fit: contain;      /* Match how your image fits; use 'cover' if you prefer */
+}
+
+/* Play button overlay */
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 148, 0, 0.9);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  font-size: 2.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  transition: background 0.2s;
+  z-index: 2;
+}
+.play-button:hover { background: #ff9400; }
