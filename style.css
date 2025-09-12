@@ -1,53 +1,146 @@
-/* style.css */
-:root {
-  --content-max: 900px;
-}
-
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  background: transparent; /* fallback */
+  width: 100%;
+  background: transparent;
+  overflow-x: hidden;
 }
 
 #bg {
   position: fixed;
   top: 0;
   left: 0;
-  /* Remove width and height here */
   display: block;
   z-index: -1;
 }
 
+body {
+  min-height: 200vh; /* Make the page tall enough to scroll */
+  min-width: 100vw;
+}
 
 .content {
-  position: relative;
-  max-width: var(--content-max);
-  margin: 0 auto;
-  padding: 6rem 1.25rem 8rem;
+  position: relative;   /* Changed from fixed */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  text-align: center;
+  z-index: 2;
+}
+.centered-name {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  font-size: clamp(4rem, 10vw, 7rem);
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 800;
   color: #eaeef7;
-  line-height: 1.6;
+  z-index: 1;
 }
 
-h1 {
-  margin: 0 0 0.5rem;
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  font-weight: 700;
-  letter-spacing: 0.02em;
+.below-center {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  max-width: 90vw;
+  text-align: center;
+  z-index: 1;
+  color: #ff9400;
+  font-size: 2rem;
+  font-family: 'Roboto', Arial, sans-serif;
+  margin: 0 0 1.5rem 0;
 }
 
-p {
-  max-width: 60ch;
-  color: #c7d2e8;
+.scroll-indicator-wrapper {
+  position: relative;
+  left: 12.5vw;
+  top: 0;
+  height: 100vh;
+  z-index: 100;
+  pointer-events: none;
+  width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.button {
-  display: inline-block;
-  margin-top: 1.25rem;
-  padding: 0.6rem 1rem;
-  border-radius: 8px;
-  color: #0a0f1f;
-  background: #99a9ff;
-  text-decoration: none;
-  font-weight: 600;
+.scroll-indicator {
+  position: relative;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 0;
+  pointer-events: none;
+}
+
+.scroll-line {
+  margin-top: 60vh; /* Start the indicator at 60% of the screen */
+  width: 3px;
+  height: 80px;
+  background: #ff9400;
+  border-radius: 2px;
+  margin-bottom: 0.5rem;
+  opacity: 0.7;
+}
+
+.scroll-text {
+  color: #ff9400;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  writing-mode: vertical-lr;
+  text-align: center;
+  user-select: none;
+  margin-bottom: 0.75rem; /* Increased spacing below "scroll" */
+  transform: rotate(180deg); /* Flip the text orientation */
+
+}
+
+/* New: the line that extends from below the word "scroll" to the bottom */
+.scroll-line-extend {
+  position: fixed;
+  left: 12.5vw; /* Match the indicator */
+  width: 3px;
+  background: #ff9400;
+  border-radius: 2px;
+  opacity: 0.7;
+  z-index: 99;
+  pointer-events: none;
+  margin-top: 1rem; /* Add this line for spacing */
+
+}
+
+.second-screen {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #252525;
+  z-index: 10;
+  transition: transform 0.6s cubic-bezier(.77,0,.18,1);
+  transform: translateY(0); /* Start in place */
+}
+
+.mouse-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  color: #ff9400;
+}
+.mouse-icon svg {
+  display: block;
+  width: 24px;
+  height: 36px;
 }
