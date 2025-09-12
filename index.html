@@ -4,17 +4,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Triangulated Navy Mesh</title>
+  <title>Michael Clancy Portfolio</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Background canvas -->
   <canvas id="bg"></canvas>
 
-  <!--  Content  -->
 <main class="content">
+  <!-- Resume button (hero only; scrolls away with this section) -->
+  <a href="files/MichaelClancyResume.pdf"
+     class="resume-button"
+     target="_blank"
+     rel="noopener">
+    Resume
+  </a>
+
   <h1 class="centered-name">Michael Clancy</h1>
   <div class="below-center">
     <p> Engineer, Artist, Designer</p>
@@ -33,11 +39,183 @@
   </div>
 </main>
 <div class="scroll-line-extend"></div>
-<section class="second-screen"></section>
 
-  <!-- Delaunay triangulation library -->
-  <script src="https://unpkg.com/delaunator@5.0.0/delaunator.min.js"></script>
-  <!-- Animation -->
-  <script src="script.js"></script>
+<!-- CGI / procedural artwork -->
+<section class="art-screen screen" data-screen="art">
+  <div class="timeline-label-right screen-label">
+    <div class="circle"></div>
+    <div class="label-text">CGI Art</div>
+  </div>
+  <div class="art-content screen__inner">
+    <div class="art-gallery screen__media" data-role="art-gallery">
+      <button class="art-gallery__nav art-gallery__nav--prev" data-action="art-prev" aria-label="Previous Art">&#10094;</button>
+      <div class="art-gallery__cols">
+        <img data-slot="0" src="images/art/0.png" alt="Art image 0" loading="lazy">
+        <img data-slot="1" src="images/art/1.png" alt="Art image 1" loading="lazy">
+        <img data-slot="2" src="images/art/2.png" alt="Art image 2" loading="lazy">
+      </div>
+      <button class="art-gallery__nav art-gallery__nav--next" data-action="art-next" aria-label="Next Art">&#10095;</button>
+    </div>
+    <div class="art-textbox screen__textbox" data-role="textbox">
+      <p>
+        Algorithms: Delauney triangulation, Lorenz, Lindenmayer, Slime Mold Simulation, Perlin Noise.
+        <br>Software: Python
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- OSRS automation project -->
+<section class="osrs-screen screen" data-screen="personal-project">
+  <div class="timeline-label-right screen-label">
+    <div class="circle"></div>
+    <div class="label-text">Personal Project</div>
+  </div>
+
+  <div class="osrs-content screen__inner">
+    <div class="osrs-imagebox screen__media">
+      <div class="media-frame media-frame--video" id="osrs-media" data-media="video">
+        <img
+          src="images/osrs_fishing_bot/0.PNG"
+          alt="OSRS Fishing Bot Cover"
+          class="media-cover media-cover--image"
+          id="osrs-cover"
+          data-role="cover"
+        />
+        <button class="play-button media-play-button" id="osrs-play" aria-label="Play OSRS Fishing Bot Video" data-action="play-video">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <polygon points="10,7 29,18 10,29" fill="#fff"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="osrs-textbox screen__textbox" data-role="textbox">
+      <p>
+        This project automates gameplay loops in Runescape through leverage of real-time computer vision, template matching, A* pathfinding,
+        and a finite state machine. This is achieved without any code injection or memory reading.
+      </p>
+    </div>
+  </div>
+
+  <a href="https://github.com/clancyclancy/computer_vision_osrs_bot"
+     class="screen-link project-github-link screen__footer-link"
+     target="_blank"
+     rel="noopener"
+     data-link="github">
+    View Project on GitHub
+  </a>
+</section>
+
+<!-- Graduate research -->
+<section class="grad-screen screen" data-screen="graduate-research">
+  <div class="timeline-label-right screen-label">
+    <div class="circle"></div>
+    <div class="label-text">Graduate Research</div>
+  </div>
+
+  <div class="grad-research-content screen__inner">
+    <div class="grad-research-imagebox screen__media">
+      <div class="media-frame media-frame--video" id="grad-media" data-media="video">
+        <img
+          src="images/graduate_research/0.PNG"
+          alt="Graduate Research Cover"
+          class="media-cover media-cover--image"
+          id="grad-cover"
+          data-role="cover"
+        />
+        <button class="play-button media-play-button" id="grad-play" aria-label="Play Graduate Research Video" data-action="play-video">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <polygon points="10,7 29,18 10,29" fill="#fff"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="grad-research-textbox screen__textbox" data-role="textbox">
+      <p>
+        Upper leg fractures are serious injuries with long recoveries and frequent complications.
+        My research contributed to the development of Robossis, a robotic system built to assist surgeons in femur repair.
+      </p>
+    </div>
+  </div>
+
+  <a href="files/JMR-23-1106.pdf"
+     class="screen-link grad-paper-link screen__footer-link"
+     target="_blank"
+     rel="noopener"
+     data-link="pdf">
+    Open Published Paper (PDF)
+  </a>
+</section>
+
+<!-- Charcoal sketches -->
+<section class="charcoal-screen screen" data-screen="charcoal">
+  <div class="timeline-label-right screen-label">
+    <div class="circle"></div>
+    <div class="label-text">Sketches</div>
+  </div>
+  <div class="charcoal-content screen__inner">
+    <div class="charcoal-gallery screen__media" data-role="charcoal-gallery">
+      <button class="charcoal-gallery__nav charcoal-gallery__nav--prev" data-action="charcoal-prev" aria-label="Previous Art">&#10094;</button>
+      <div class="charcoal-gallery__cols">
+        <img data-slot="0" src="images/charcoal/0.png" alt="charcoal image 0" loading="lazy">
+        <img data-slot="1" src="images/charcoal/1.png" alt="charcoal image 1" loading="lazy">
+        <img data-slot="2" src="images/charcoal/2.png" alt="charcoal image 2" loading="lazy">
+      </div>
+      <button class="charcoal-gallery__nav charcoal-gallery__nav--next" data-action="charcoal-next" aria-label="Next charcoal">&#10095;</button>
+    </div>
+    <div class="charcoal-textbox screen__textbox" data-role="textbox">
+      <p>
+        Charcoal on canvas
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Chess AI (placeholder state) -->
+<section class="chessai-screen screen" data-screen="chessAI">
+  <div class="timeline-label-right screen-label">
+    <div class="circle"></div>
+    <div class="label-text">Chess AI - Pending</div>
+  </div>
+
+  <div class="chessai-content screen__inner">
+    <div class="chessai-imagebox screen__media">
+      <div class="media-frame media-frame--video" id="chessai-media" data-media="video">
+        <img
+          src="images/chess_ai/0.PNG"
+          alt="Chess AI Cover"
+          class="media-cover media-cover--image"
+          id="chessai-cover"
+          data-role="cover"
+        />
+        <button class="play-button media-play-button" id="chessai-play" aria-label="Play Chess AI Video" data-action="play-video">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <polygon points="10,7 29,18 10,29" fill="#fff"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="chessai-textbox screen__textbox" data-role="textbox">
+      <p>
+        Chess AI - Pending 
+      </p>
+    </div>
+  </div>
+
+  <a href=""
+     class="screen-link chessai-github-link screen__footer-link"
+     target="_blank"
+     rel="noopener"
+     data-link="github">
+    View Project on GitHub - Pending
+  </a>
+</section>
+
+<!-- External libs and main script -->
+<script src="https://unpkg.com/delaunator@5.0.0/delaunator.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

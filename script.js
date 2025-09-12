@@ -1,9 +1,61 @@
-// script.js
+// Main script (animation + media handlers + galleries)
 
-console.log("script.js is loaded!");
-console.log("Delaunator is", typeof Delaunator);
+console.log("script.js loaded");
+console.log("Delaunator present?", typeof Delaunator);
 
 window.addEventListener('DOMContentLoaded', () => {
+  // Grad research video embed
+  const mediaFrame = document.getElementById('grad-media');
+  const coverImg = document.getElementById('grad-cover');
+  const playBtn = document.getElementById('grad-play');
+  if (mediaFrame && coverImg && playBtn) {
+    playBtn.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube.com/embed/0tiTrBepmFs?autoplay=1&rel=0&vq=hd1080&playsinline=1';
+      iframe.title = 'Graduate Research Video';
+      iframe.allow = 'autoplay; encrypted-media';
+      iframe.allowFullscreen = true;
+      mediaFrame.appendChild(iframe);
+      coverImg.style.display = 'none';
+      playBtn.style.display = 'none';
+    });
+  }
+
+  // OSRS bot video embed
+  const osrsFrame = document.getElementById('osrs-media');
+  const osrsCover = document.getElementById('osrs-cover');
+  const osrsPlay = document.getElementById('osrs-play');
+  if (osrsFrame && osrsCover && osrsPlay) {
+    osrsPlay.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube.com/embed/OB_UskZ1ajc?autoplay=1&rel=0&vq=hd1080&playsinline=1';
+      iframe.title = 'OSRS Fishing Bot Video';
+      iframe.allow = 'autoplay; encrypted-media';
+      iframe.allowFullscreen = true;
+      osrsFrame.appendChild(iframe);
+      osrsCover.style.display = 'none';
+      osrsPlay.style.display = 'none';
+    });
+  }
+
+  // Chess AI placeholder video embed
+  const chessAIFrame = document.getElementById('chessai-media');
+  const chessAICover = document.getElementById('chessai-cover');
+  const chessAIPlay  = document.getElementById('chessai-play');
+  if (chessAIFrame && chessAICover && chessAIPlay) {
+    chessAIPlay.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube.com/embed/VIDEO_ID?autoplay=1&rel=0&vq=hd1080&playsinline=1';
+      iframe.title = 'Chess AI Video';
+      iframe.allow = 'autoplay; encrypted-media';
+      iframe.allowFullscreen = true;
+      chessAIFrame.appendChild(iframe);
+      chessAICover.style.display = 'none';
+      chessAIPlay.style.display = 'none';
+    });
+  }
+
+  // Scroll line sizing
   const canvas = document.getElementById("bg");
   const ctx = canvas.getContext("2d");
   const content = document.querySelector('.content');
@@ -18,47 +70,29 @@ window.addEventListener('DOMContentLoaded', () => {
     scrollLineExtend.style.top = `${top}px`;
     scrollLineExtend.style.height = `${height}px`;
   }
-
   window.addEventListener('scroll', positionScrollLineExtend);
   window.addEventListener('resize', positionScrollLineExtend);
   positionScrollLineExtend();
 
-  // Commented out: fade/animation on scroll
-  /*
-  function handleScreenTransition() {
-    const scrollY = window.scrollY || window.pageYOffset;
-    const vh = window.innerHeight;
-    let progress = Math.min(scrollY / vh, 1);
-    if (secondScreen) {
-      secondScreen.style.transform = `translateY(${(1 - progress) * 100}%)`;
-    }
-    const opacity = 1 - progress;
-    if (content) content.style.opacity = opacity;
-    if (canvas) canvas.style.opacity = opacity;
-  }
-  window.addEventListener('scroll', handleScreenTransition);
-  handleScreenTransition(); // initialize on load
-  */
-
-  // ====== CONFIG ======
+  // Background animation config
   const NUM_POINTS = 60;
   const EDGE_POINTS_PER_SIDE = 10;
   const POINT_SPEED = 0.15;
   const POINT_RADIUS = 10;
   const COLOR_SHIFT_SPEED = 0.001;
 
-  const HUE_MIN = 0.66; // navy hue
-  const VAL_MIN = 0.35;//0.10;
-  const VAL_MAX = 0.60;//0.35;
+  const HUE_MIN = 0.66;
+  const VAL_MIN = 0.35;
+  const VAL_MAX = 0.60;
   const SAT_MIN = 0.9;
   const SAT_MAX = 1.0;
 
-  // ====== STATE ======
+  // State arrays
   let points = [];
   let velocities = [];
   let pointHSV = [];
 
-  // ====== UTILITIES ======
+  // HSV -> RGB helper
   function hsvToRgb(h, s, v) {
     let r, g, b;
     let i = Math.floor(h * 6);
@@ -81,7 +115,7 @@ window.addEventListener('DOMContentLoaded', () => {
     return min + Math.random() * (max - min);
   }
 
-  // ====== INIT POINTS ======
+  // Point initialization
   function initPoints() {
     points = [];
     velocities = [];
@@ -113,7 +147,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Match canvas size to window size and re-init points
+  // Canvas sizing
   function resizeCanvas() {
     WIDTH = window.innerWidth;
     HEIGHT = window.innerHeight;
@@ -124,116 +158,173 @@ window.addEventListener('DOMContentLoaded', () => {
   resizeCanvas();
   window.addEventListener("resize", resizeCanvas);
 
-  // Fade out canvas on scroll
-  /*
-  function handleScrollFade() {
-    // Fade out over the first 300px of scroll
-    const fadeStart = 0;
-    const fadeEnd = 300;
-    const scrollY = window.scrollY || window.pageYOffset;
-    let opacity = 1;
-    if (scrollY > fadeStart) {
-      opacity = 1 - Math.min((scrollY - fadeStart) / (fadeEnd - fadeStart), 1);
+  // Simple image switcher (grad) — kept for possible reuse
+  const gradImages = [
+    "images/graduate_research/0.PNG",
+    "images/graduate_research/1.PNG"
+  ];
+  let currentGradImage = 0;
+  const gradImageEl = document.getElementById('grad-research-image');
+  if (gradImageEl) {
+    gradImageEl.addEventListener('click', () => {
+      currentGradImage = (currentGradImage + 1) % gradImages.length;
+      gradImageEl.src = gradImages[currentGradImage];
+    });
+  }
+
+  // Video cover play button logic
+  const playButton = document.getElementById('play-button');
+  const videoCover = document.getElementById('video-cover');
+  const videoBox = document.getElementById('grad-research-video-box');
+  if (playButton && videoCover && videoBox) {
+    playButton.addEventListener('click', () => {
+      videoBox.innerHTML = `
+        <iframe width="100%" height="100%" style="border-radius:16px; box-shadow:0 2px 16px rgba(0,0,0,0.12);"
+          src="https://www.youtube.com/embed/0tiTrBepmFs?autoplay=1&rel=0"
+          title="Graduate Research Video"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen>
+        </iframe>
+      `;
+    });
+  }
+
+  // Three-column cycling gallery (art)
+  (function initArtGallery() {
+    const gallery = document.querySelector('[data-role="art-gallery"]');
+    if (!gallery) return;
+    const ART_IMAGE_COUNT = 10;
+    const artImages = Array.from({ length: ART_IMAGE_COUNT }, (_, i) => `images/art/${i}.png`);
+    let startIndex = 0;
+    const slots = gallery.querySelectorAll('[data-slot]');
+    const prevBtn = gallery.querySelector('[data-action="art-prev"]');
+    const nextBtn = gallery.querySelector('[data-action="art-next"]');
+    function render() {
+      slots.forEach((img, offset) => {
+        const idx = (startIndex + offset) % artImages.length;
+        img.src = artImages[idx];
+        img.alt = `Art image ${idx}`;
+      });
     }
-    canvas.style.opacity = opacity;
-  }
-  window.addEventListener('scroll', handleScrollFade);
-  handleScrollFade(); // initialize on load
-  */
-
-  // ====== ANIMATION LOOP ======
-
-function step() {
-  ctx.clearRect(0, 0, WIDTH, HEIGHT);
-
-  // Move interior points
-  for (let i = 0; i < points.length; i++) {
-    const vx = velocities[i][0];
-    const vy = velocities[i][1];
-    if (vx !== 0 || vy !== 0) {
-      points[i][0] += vx;
-      points[i][1] += vy;
-      if (points[i][0] <= 0 || points[i][0] >= WIDTH) velocities[i][0] *= -1;
-      if (points[i][1] <= 0 || points[i][1] >= HEIGHT) velocities[i][1] *= -1;
+    function step(delta) {
+      startIndex = (startIndex + delta + artImages.length) % artImages.length;
+      render();
     }
+    prevBtn?.addEventListener('click', () => step(-1));
+    nextBtn?.addEventListener('click', () => step(1));
+    render();
+  })();
+
+  // Charcoal gallery (same logic as art)
+  (function initCharcoalGallery() {
+    const gallery = document.querySelector('[data-role="charcoal-gallery"]');
+    if (!gallery) return;
+    const CHARCOAL_IMAGE_COUNT = 3;
+    const images = Array.from({ length: CHARCOAL_IMAGE_COUNT }, (_, i) => `images/charcoal/${i}.png`);
+    let startIndex = 0;
+    const slots = gallery.querySelectorAll('[data-slot]');
+    const prevBtn = gallery.querySelector('[data-action="charcoal-prev"]');
+    const nextBtn = gallery.querySelector('[data-action="charcoal-next"]');
+    function render() {
+      slots.forEach((img, offset) => {
+        const idx = (startIndex + offset) % images.length;
+        img.src = images[idx];
+        img.alt = `Charcoal image ${idx}`;
+      });
+    }
+    function step(delta) {
+      startIndex = (startIndex + delta + images.length) % images.length;
+      render();
+    }
+    prevBtn?.addEventListener('click', () => step(-1));
+    nextBtn?.addEventListener('click', () => step(1));
+    render();
+  })();
+
+  // Animation loop for triangulated background
+  function stepFrame() {
+    ctx.clearRect(0, 0, WIDTH, HEIGHT);
+
+    // Move interior points
+    for (let i = 0; i < points.length; i++) {
+      const vx = velocities[i][0];
+      const vy = velocities[i][1];
+      if (vx !== 0 || vy !== 0) {
+        points[i][0] += vx;
+        points[i][1] += vy;
+        if (points[i][0] <= 0 || points[i][0] >= WIDTH) velocities[i][0] *= -1;
+        if (points[i][1] <= 0 || points[i][1] >= HEIGHT) velocities[i][1] *= -1;
+      }
+    }
+
+    // Subtle brightness jitter
+    for (let hsv of pointHSV) {
+      hsv[2] += (Math.random() * 2 - 1) * COLOR_SHIFT_SPEED;
+      hsv[2] = Math.max(VAL_MIN, Math.min(VAL_MAX, hsv[2]));
+    }
+
+    // Triangulation
+    const delaunay = Delaunator.from(points);
+    const triangles = delaunay.triangles;
+
+    // First fill pass
+    for (let i = 0; i < triangles.length; i += 3) {
+      const p0 = points[triangles[i]];
+      const p1 = points[triangles[i + 1]];
+      const p2 = points[triangles[i + 2]];
+      const c0 = pointHSV[triangles[i]];
+      const c1 = pointHSV[triangles[i + 1]];
+      const c2 = pointHSV[triangles[i + 2]];
+      const avgH = (c0[0] + c1[0] + c2[0]) / 3;
+      const avgS = (c0[1] + c1[1] + c2[1]) / 3;
+      const avgV = (c0[2] + c1[2] + c2[2]) / 3;
+      const [r, g, b] = hsvToRgb(avgH, avgS, avgV);
+      ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+      ctx.beginPath();
+      ctx.moveTo(p0[0], p0[1]);
+      ctx.lineTo(p1[0], p1[1]);
+      ctx.lineTo(p2[0], p2[1]);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    // Stroke pass (same color)
+    for (let i = 0; i < triangles.length; i += 3) {
+      const p0 = points[triangles[i]];
+      const p1 = points[triangles[i + 1]];
+      const p2 = points[triangles[i + 2]];
+      const c0 = pointHSV[triangles[i]];
+      const c1 = pointHSV[triangles[i + 1]];
+      const c2 = pointHSV[triangles[i + 2]];
+      const avgH = (c0[0] + c1[0] + c2[0]) / 3;
+      const avgS = (c0[1] + c1[1] + c2[1]) / 3;
+      const avgV = (c0[2] + c1[2] + c2[2]) / 3;
+      const [r, g, b] = hsvToRgb(avgH, avgS, avgV);
+      const color = `rgb(${r}, ${g}, ${b})`;
+      ctx.fillStyle = color;
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(p0[0], p0[1]);
+      ctx.lineTo(p1[0], p1[1]);
+      ctx.lineTo(p2[0], p2[1]);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+    }
+
+    // Point render (kept for a dotted aesthetic)
+    for (let i = 0; i < points.length; i++) {
+      const [h, s, v] = pointHSV[i];
+      const [r, g, b] = hsvToRgb(h, s, v);
+      ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+      ctx.beginPath();
+      ctx.arc(points[i][0], points[i][1], POINT_RADIUS, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    requestAnimationFrame(stepFrame);
   }
-
-  // Shimmer effect
-  for (let hsv of pointHSV) {
-    hsv[2] += (Math.random() * 2 - 1) * COLOR_SHIFT_SPEED;
-    hsv[2] = Math.max(VAL_MIN, Math.min(VAL_MAX, hsv[2]));
-  }
-
-  // Triangulate
-  const delaunay = Delaunator.from(points);
-  const triangles = delaunay.triangles;
-
-  // Draw triangles (fill)
-  for (let i = 0; i < triangles.length; i += 3) {
-    const p0 = points[triangles[i]];
-    const p1 = points[triangles[i + 1]];
-    const p2 = points[triangles[i + 2]];
-
-    const c0 = pointHSV[triangles[i]];
-    const c1 = pointHSV[triangles[i + 1]];
-    const c2 = pointHSV[triangles[i + 2]];
-
-    const avgH = (c0[0] + c1[0] + c2[0]) / 3;
-    const avgS = (c0[1] + c1[1] + c2[1]) / 3;
-    const avgV = (c0[2] + c1[2] + c2[2]) / 3;
-
-    const [r, g, b] = hsvToRgb(avgH, avgS, avgV);
-    ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
-
-    ctx.beginPath();
-    ctx.moveTo(p0[0], p0[1]);
-    ctx.lineTo(p1[0], p1[1]);
-    ctx.lineTo(p2[0], p2[1]);
-    ctx.closePath();
-    ctx.fill();
-  }
-
-  // Draw triangles (fill and stroke with same color)
-  for (let i = 0; i < triangles.length; i += 3) {
-    const p0 = points[triangles[i]];
-    const p1 = points[triangles[i + 1]];
-    const p2 = points[triangles[i + 2]];
-
-    const c0 = pointHSV[triangles[i]];
-    const c1 = pointHSV[triangles[i + 1]];
-    const c2 = pointHSV[triangles[i + 2]];
-
-    const avgH = (c0[0] + c1[0] + c2[0]) / 3;
-    const avgS = (c0[1] + c1[1] + c2[1]) / 3;
-    const avgV = (c0[2] + c1[2] + c2[2]) / 3;
-
-    const [r, g, b] = hsvToRgb(avgH, avgS, avgV);
-    const color = `rgb(${r}, ${g}, ${b})`;
-    ctx.fillStyle = color;
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 1; // or 0.5 for thinner lines
-
-    ctx.beginPath();
-    ctx.moveTo(p0[0], p0[1]);
-    ctx.lineTo(p1[0], p1[1]);
-    ctx.lineTo(p2[0], p2[1]);
-    ctx.closePath();
-    ctx.fill();
-    ctx.stroke();
-  }
-
-  // Draw points
-  for (let i = 0; i < points.length; i++) {
-    const [h, s, v] = pointHSV[i];
-    const [r, g, b] = hsvToRgb(h, s, v);
-    ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
-    ctx.beginPath();
-    ctx.arc(points[i][0], points[i][1], POINT_RADIUS, 0, Math.PI * 2);
-    ctx.fill();
-  }
-
-  requestAnimationFrame(step);
-}
-
-  requestAnimationFrame(step);
+  requestAnimationFrame(stepFrame);
 });
