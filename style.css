@@ -144,3 +144,38 @@ body {
   width: 24px;
   height: 36px;
 }
+
+/* Bubble and circle on scroll line extend */
+.scroll-bubble-container {
+  position: fixed;
+  left: 12.5vw;
+  top: 20vh; /* Adjust this value to place the bubble vertically */
+  display: flex;
+  align-items: center;
+  z-index: 200;
+  pointer-events: none;
+}
+
+.scroll-bubble-circle {
+  width: 18px;
+  height: 18px;
+  background: #ff9400;
+  border-radius: 50%;
+  z-index: 201;
+  margin-left: -7px; /* center should be -9, literally no idea why -7 centers it. :/ */
+}
+
+.scroll-bubble-text {
+  background: transparent;
+  color: #ff9400;
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 1rem;
+  border-radius: 16px;
+  border: 2px solid #ff9400; 
+  padding: 0.4em 1em;
+  margin-left: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  white-space: nowrap;
+  z-index: 201;
+  pointer-events: auto;
+}
