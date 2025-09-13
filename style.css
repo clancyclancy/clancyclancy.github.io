@@ -16,7 +16,7 @@ html, body {
 }
 
 body {
-  min-height: 200vh; /* Make the page tall enough to scroll */
+  min-height: 300vh; /* (Optional) ensure enough scroll space for 3 screens */
   min-width: 100vw;
 }
 
@@ -151,31 +151,43 @@ body {
 
 /* Bubble and circle on scroll line extend */
 .scroll-bubble-container {
-  position: fixed;
-  left: 12.5vw;
-  top: 10vh; /* Adjust this value to place the bubble vertically */
+  position: absolute;        /* Was fixed: now scoped to its section */
+  left: 12.5vw;              /* Align with vertical line */
   display: flex;
   align-items: center;
   z-index: 200;
   pointer-events: none;
 }
 
+/* Section‑specific vertical placement */
+.second-screen .grad-research-bubble {
+  top: 10vh;
+}
+.third-screen  .personal-project-bubble {
+  top: 30vh;                 /* Adjust as desired */
+}
+
+/* Circle */
 .scroll-bubble-circle {
   width: 18px;
   height: 18px;
   background: #ff9400;
   border-radius: 50%;
+  border: 3px solid #ff9400;
+  box-shadow: 0 0 0 2px #ff9400;
+  margin-left: -7px;         /* Adjust to center over 3px line (tweak if needed) */
+  box-sizing: border-box;
   z-index: 201;
-  margin-left: -7px; /* center should be -9, literally no idea why -7 centers it. :/ */
 }
 
+/* Text */
 .scroll-bubble-text {
   background: transparent;
   color: #ff9400;
   font-family: 'Roboto', Arial, sans-serif;
   font-size: 1rem;
+  border: 2px solid #ff9400;
   border-radius: 16px;
-  border: 2px solid #ff9400; 
   padding: 0.4em 1em;
   margin-left: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
@@ -265,5 +277,94 @@ body {
   box-shadow: 0 2px 8px rgba(0,0,0,0.18);
   transition: background 0.2s;
   z-index: 2;
+  opacity: 0.65; /* Slightly transparent when not hovered */;
 }
 .play-button:hover { background: #ff9400; }
+/* ========== THIRD SCREEN STYLES (OSRS Fishing Bot) ========== */
+.third-screen {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: #1e1e1e;
+  z-index: 10;
+  overflow: hidden;
+  transform: translateY(0); /* Added: creates containing block so fixed bubble behaves like on second screen */
+}
+
+/* Layout container similar to .grad-research-content */
+.osrs-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Text box aligned from the vertical guide line with same spacing logic */
+.osrs-textbox {
+  flex: 1 1 50%;
+  max-width: 42vw;                 /* Slightly wider than grad box if desired */
+  min-width: 260px;
+  margin-left: calc(12.5vw + 16px);/* Align to vertical line + buffer */
+  margin-right: 2vw;
+  background: transparent;
+  color: #ffffff;
+  padding: 2rem 2rem;
+  font-family: 'Roboto', Arial, sans-serif;
+  box-sizing: border-box;
+  font-size: 1.15rem;
+  text-align: justify;
+  margin-top: 6vh;                 /* Vertical spacing from bubble area */
+  border-radius: 16px;
+  /* Optional subtle outline: */
+  /* outline: 1px solid rgba(255,255,255,0.08); */
+}
+
+/* Image / video container on right half mirroring grad section */
+.osrs-imagebox {
+  position: absolute;
+  right: 5vw;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(40vw, 900px);
+  max-height: 70vh;
+}
+
+/* Reuse .media-frame, .media-cover, .play-button from earlier definitions.
+   No duplication needed. If you want a variant, add a modifier here. */
+
+/* OPTIONAL: Slight tint when hovering pre-play */
+.osrs-imagebox .media-frame:hover .media-cover {
+  filter: brightness(1.05);
+}
+
+/* Hide both bubbles by default */
+.grad-research-bubble,
+.personal-project-bubble {
+  display: none;
+}
+
+/* Show Graduate Research bubble only when .second-screen is in view */
+.second-screen .grad-research-bubble {
+  display: flex;
+  position: fixed;
+  left: 12.5vw;
+  top: 10vh;
+  z-index: 200;
+  align-items: center;
+  pointer-events: none;
+}
+
+/* Show Personal Project bubble only when .third-screen is in view */
+.third-screen .personal-project-bubble {
+  display: flex;
+  position: fixed;
+  left: 12.5vw;
+  top: 30vh; /* Adjust as needed */
+  z-index: 200;
+  align-items: center;
+  pointer-events: none;
+}

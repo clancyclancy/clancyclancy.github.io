@@ -34,7 +34,7 @@
 </main>
 <div class="scroll-line-extend"></div>
 <section class="second-screen">
-  <div class="scroll-bubble-container">
+  <div class="scroll-bubble-container grad-research-bubble">
     <div class="scroll-bubble-circle"></div>
     <div class="scroll-bubble-text">Graduate Research</div>
   </div>
@@ -62,19 +62,58 @@
           class="media-cover"
           id="grad-cover"
         />
-        <button class="play-button" id="grad-play" aria-label="Play video">
+        <button class="play-button" id="grad-play" aria-label="Play Graduate Research Video">
           <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-            <circle cx="18" cy="18" r="18" fill="none"/>
-            <!-- Even larger arrow: nearly fills the circle -->
             <polygon points="10,7 29,18 10,29" fill="#fff"/>
           </svg>
         </button>
       </div>
     </div>
-      <!-- The YouTube iframe will be injected here on play -->
-    </div>
   </div>
 </section>
+
+  <!-- ===== THIRD SCREEN : OSRS Fishing Bot ===== -->
+  <!-- Mirrors the structure of second screen with its own IDs and classes -->
+  <section class="third-screen">
+    <div class="scroll-bubble-container personal-project-bubble">
+      <div class="scroll-bubble-circle"></div>
+      <div class="scroll-bubble-text">Personal Project</div>
+    </div>
+    <div class="osrs-content">
+      <!-- Text box aligned similarly to grad-research-textbox -->
+      <div class="osrs-textbox">
+        <h2>Computer Vision Gameplay Automation</h2>
+        <p>
+          This project leverages Python, real-time computer vision, A* pathfinding, and a finite state machine to 
+          create a high-performance automation framework capable of interpreting and interacting with dynamic 
+          screen environments at up to 30 FPS. 
+        </p>
+        <p>
+          Built specifically for Old School RuneScape (OSRS), the system automates a complete fishing–cooking–banking loop 
+          in Lumbridge by detecting game elements using YOLO object detection, navigating via template matching and map grid logic, 
+          and executing contextual actions based on game state transitions — all without injecting code or reading memory, 
+          making it adaptable and non-intrusive.
+        </p>
+      </div>
+
+      <!-- Media frame: static cover image + play button => replaced by YouTube iframe on click -->
+      <div class="osrs-imagebox">
+        <div class="media-frame" id="osrs-media">
+          <img
+            src="images/osrs_fishing_bot/0.PNG"
+            alt="OSRS Fishing Bot Cover"
+            class="media-cover"
+            id="osrs-cover"
+          />
+          <button class="play-button" id="osrs-play" aria-label="Play OSRS Fishing Bot Video">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+              <polygon points="10,7 29,18 10,29" fill="#fff"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Delaunay triangulation library -->
   <script src="https://unpkg.com/delaunator@5.0.0/delaunator.min.js"></script>

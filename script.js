@@ -4,26 +4,40 @@ console.log("script.js is loaded!");
 console.log("Delaunator is", typeof Delaunator);
 
 window.addEventListener('DOMContentLoaded', () => {
+  // ===== EXISTING GRAD RESEARCH VIDEO HANDLER =====
   const mediaFrame = document.getElementById('grad-media');
   const coverImg = document.getElementById('grad-cover');
   const playBtn = document.getElementById('grad-play');
 
   if (mediaFrame && coverImg && playBtn) {
     playBtn.addEventListener('click', () => {
-      // Create iframe that fills the same frame as the image
       const iframe = document.createElement('iframe');
       iframe.src = 'https://www.youtube.com/embed/0tiTrBepmFs?autoplay=1&rel=0&vq=hd1080&playsinline=1';
       iframe.title = 'Graduate Research Video';
       iframe.allow = 'autoplay; encrypted-media';
       iframe.allowFullscreen = true;
-
-      // Ensure sizing matches the image by using the same CSS selector
-      // (.media-frame iframe shares the same absolute fill styles)
       mediaFrame.appendChild(iframe);
-
-      // Optionally hide/remove cover and button once video starts
       coverImg.style.display = 'none';
       playBtn.style.display = 'none';
+    });
+  }
+
+  // ===== NEW: OSRS FISHING BOT VIDEO HANDLER =====
+  // Same pattern, separate IDs to keep logic isolated.
+  const osrsFrame = document.getElementById('osrs-media');
+  const osrsCover = document.getElementById('osrs-cover');
+  const osrsPlay = document.getElementById('osrs-play');
+
+  if (osrsFrame && osrsCover && osrsPlay) {
+    osrsPlay.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube.com/embed/OB_UskZ1ajc?autoplay=1&rel=0&vq=hd1080&playsinline=1';
+      iframe.title = 'OSRS Fishing Bot Video';
+      iframe.allow = 'autoplay; encrypted-media';
+      iframe.allowFullscreen = true;
+      osrsFrame.appendChild(iframe);
+      osrsCover.style.display = 'none';
+      osrsPlay.style.display = 'none';
     });
   }
 
