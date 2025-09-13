@@ -33,87 +33,91 @@
   </div>
 </main>
 <div class="scroll-line-extend"></div>
-<section class="second-screen">
-  <div class="scroll-bubble-container grad-research-bubble">
-    <div class="scroll-bubble-circle"></div>
-    <div class="scroll-bubble-text">Graduate Research</div>
+<section class="second-screen screen" data-screen="graduate-research">
+  <div class="timeline-label-right screen-label">
+    <div class="circle"></div>
+    <div class="label-text">Graduate Research</div>
   </div>
-  <div class="grad-research-content">
-    <div class="grad-research-textbox">
-      <h2></h2>
-      <p>
-        Femur fractures are serious injuries with long recoveries and frequent complications. 
-        My research tackles a key surgical challenge: aligning broken femurs accurately. 
-        I contributed to the development of Robossis, a robotic system built to assist surgeons in femur repair. 
-        Unlike typical robots, Robossis delivers high force and precision, crucial for realigning bone fragments.
-      </p>
-      <p>
-        Using genetic algorithms, I optimized its mechanical design. 
-        Testing showed Robossis achieved just 0.31 mm average error and surpassed clinical standards for motion and force. 
-        This work, published in the ASME Journal of Medical Robotics, advances safer, more effective robotic surgery.
-      </p>
-    </div>
-      <!-- Image/video frame on the right half -->
-    <div class="grad-research-imagebox">
-      <div class="media-frame" id="grad-media">
+
+  <!-- Added generic structural class screen__inner (keeps original class) -->
+  <div class="grad-research-content screen__inner">
+    <!-- Media wrapper gets uniform class screen__media (original kept) -->
+    <div class="grad-research-imagebox screen__media">
+      <div class="media-frame media-frame--video" id="grad-media" data-media="video">
         <img
           src="images/graduate_research/0.PNG"
           alt="Graduate Research Cover"
-          class="media-cover"
+          class="media-cover media-cover--image"
           id="grad-cover"
+          data-role="cover"
         />
-        <button class="play-button" id="grad-play" aria-label="Play Graduate Research Video">
+        <button class="play-button media-play-button" id="grad-play" aria-label="Play Graduate Research Video" data-action="play-video">
           <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
             <polygon points="10,7 29,18 10,29" fill="#fff"/>
           </svg>
         </button>
       </div>
     </div>
+
+    <!-- Text box unified class screen__textbox -->
+    <div class="grad-research-textbox screen__textbox" data-role="textbox">
+      <p>
+        Upper leg fractures are serious injuries with long recoveries and frequent complications.
+        My research contributed to the development of Robossis, a robotic system built to assist surgeons in femur repair.
+      </p>
+    </div>
   </div>
+
+  <!-- Footer link unified class screen__footer-link -->
+  <a href="files/JMR-23-1106.pdf"
+     class="screen-link grad-paper-link screen__footer-link"
+     target="_blank"
+     rel="noopener"
+     data-link="pdf">
+    Open Published Paper (PDF)
+  </a>
 </section>
 
-  <!-- ===== THIRD SCREEN : OSRS Fishing Bot ===== -->
-  <!-- Mirrors the structure of second screen with its own IDs and classes -->
-  <section class="third-screen">
-    <div class="scroll-bubble-container personal-project-bubble">
-      <div class="scroll-bubble-circle"></div>
-      <div class="scroll-bubble-text">Personal Project</div>
-    </div>
-    <div class="osrs-content">
-      <!-- Text box aligned similarly to grad-research-textbox -->
-      <div class="osrs-textbox">
-        <h2>Computer Vision Gameplay Automation</h2>
-        <p>
-          This project leverages Python, real-time computer vision, A* pathfinding, and a finite state machine to 
-          create a high-performance automation framework capable of interpreting and interacting with dynamic 
-          screen environments at up to 30 FPS. 
-        </p>
-        <p>
-          Built specifically for Old School RuneScape (OSRS), the system automates a complete fishing–cooking–banking loop 
-          in Lumbridge by detecting game elements using YOLO object detection, navigating via template matching and map grid logic, 
-          and executing contextual actions based on game state transitions — all without injecting code or reading memory, 
-          making it adaptable and non-intrusive.
-        </p>
-      </div>
+<section class="third-screen screen" data-screen="personal-project">
+  <div class="timeline-label-right screen-label">
+    <div class="circle"></div>
+    <div class="label-text">Personal Project</div>
+  </div>
 
-      <!-- Media frame: static cover image + play button => replaced by YouTube iframe on click -->
-      <div class="osrs-imagebox">
-        <div class="media-frame" id="osrs-media">
-          <img
-            src="images/osrs_fishing_bot/0.PNG"
-            alt="OSRS Fishing Bot Cover"
-            class="media-cover"
-            id="osrs-cover"
-          />
-          <button class="play-button" id="osrs-play" aria-label="Play OSRS Fishing Bot Video">
-            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-              <polygon points="10,7 29,18 10,29" fill="#fff"/>
-            </svg>
-          </button>
-        </div>
+  <div class="osrs-content screen__inner">
+    <div class="osrs-imagebox screen__media">
+      <div class="media-frame media-frame--video" id="osrs-media" data-media="video">
+        <img
+          src="images/osrs_fishing_bot/0.PNG"
+          alt="OSRS Fishing Bot Cover"
+          class="media-cover media-cover--image"
+          id="osrs-cover"
+          data-role="cover"
+        />
+        <button class="play-button media-play-button" id="osrs-play" aria-label="Play OSRS Fishing Bot Video" data-action="play-video">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <polygon points="10,7 29,18 10,29" fill="#fff"/>
+          </svg>
+        </button>
       </div>
     </div>
-  </section>
+
+    <div class="osrs-textbox screen__textbox" data-role="textbox">
+      <p>
+        This project automates gameplay loops in Runescape through leverage of real-time computer vision, template matching, A* pathfinding,
+        and a finite state machine. This is achieved without any code injection or memory reading. Up to 30 fps is achieved in Python on a laptop.
+      </p>
+    </div>
+  </div>
+
+  <a href="https://github.com/clancyclancy/computer_vision_osrs_bot"
+     class="screen-link project-github-link screen__footer-link"
+     target="_blank"
+     rel="noopener"
+     data-link="github">
+    View Project on GitHub
+  </a>
+</section>
 
   <!-- Delaunay triangulation library -->
   <script src="https://unpkg.com/delaunator@5.0.0/delaunator.min.js"></script>

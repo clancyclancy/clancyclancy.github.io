@@ -1,3 +1,51 @@
+/* ====================================
+   TOKENS / DESIGN VARIABLES
+==================================== */
+:root {
+  /* Layout widths */
+  --screen-max-width: min(60vw, 1100px);
+  --textbox-max-width: min(60vw, 850px);
+
+  /* Spacing */
+  --screen-gap: 0.5rem;
+  --screen-stack-gap: 0.5rem;
+  --screen-top-pad: 6vh;
+  --screen-vertical-pad: 6vh;
+  --screen-text-pad: 2rem;
+  --screen-footer-offset: 2vh;
+
+  /* Textbox */
+  --textbox-padding-x: 2rem;
+  --textbox-padding-y: 0.0rem;
+  --textbox-radius: 16px;
+  --textbox-bg: transparent;
+  --textbox-color: #ffffff;
+  --textbox-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  --textbox-font-size-lg: 1.25rem;
+  --textbox-font-size: 1.15rem;
+  --textbox-max-height: 20vh;
+
+  /* Colors */
+  --color-accent: #ff9400;
+  --color-accent-rgba: 255,148,0;
+  --color-text-light: #ffffff;
+  --color-bg-dark-1: #252525;
+  --color-bg-dark-2: #1e1e1e;
+
+  /* Media */
+  --media-aspect-ratio: 16 / 9;
+  --play-button-size: 64px;
+
+  /* Timeline */
+  --timeline-x: 12.5vw;
+  --timeline-line-width: 3px;
+  --timeline-line-half: calc(var(--timeline-line-width) / 2);
+  --timeline-label-offset: 4vh;
+}
+
+/* ====================================
+   GLOBAL / RESET
+==================================== */
 html, body {
   margin: 0;
   padding: 0;
@@ -5,31 +53,34 @@ html, body {
   width: 100%;
   background: transparent;
   overflow-x: hidden;
+  font-family: 'Roboto', Arial, sans-serif;
+  color: var(--color-text-light);
+}
+
+body {
+  min-height: 300vh; /* enough scroll for 3 screens */
+  min-width: 100vw;
 }
 
 #bg {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   display: block;
   z-index: -1;
 }
 
-body {
-  min-height: 300vh; /* (Optional) ensure enough scroll space for 3 screens */
-  min-width: 100vw;
-}
-
+/* ====================================
+   HERO / FIRST SCREEN CONTENT
+==================================== */
 .content {
-  position: relative;   /* Changed from fixed */
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   text-align: center;
   z-index: 2;
 }
+
 .centered-name {
   position: absolute;
   top: 50%;
@@ -40,11 +91,10 @@ body {
   font-family: 'Montserrat', Arial, sans-serif;
   font-weight: 800;
   color: #eaeef7;
-  z-index: 1;
-  white-space: nowrap;      /* Prevent line breaks */
-  overflow: hidden;         /* Prevents overflow from causing scrollbars */
-  text-overflow: ellipsis;  /* Optional: shows "..." if text is too long */
-  max-width: 100vw;         /* Prevents overflow outside viewport */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100vw;
 }
 
 .below-center {
@@ -52,20 +102,19 @@ body {
   top: 55%;
   left: 50%;
   transform: translateX(-50%);
-  width: auto;
   max-width: 90vw;
   text-align: center;
-  z-index: 1;
-  color: #ff9400;
+  color: var(--color-accent);
   font-size: 2rem;
-  font-family: 'Roboto', Arial, sans-serif;
   margin: 0 0 1.5rem 0;
 }
 
+/* ====================================
+   SCROLL INDICATOR / TIMELINE
+==================================== */
 .scroll-indicator-wrapper {
   position: relative;
-  left: 12.5vw;
-  top: 0;
+  left: calc(var(--timeline-x) + var(--timeline-line-half));
   height: 100vh;
   z-index: 100;
   pointer-events: none;
@@ -76,8 +125,6 @@ body {
 }
 
 .scroll-indicator {
-  position: relative;
-  top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -86,189 +133,234 @@ body {
 }
 
 .scroll-line {
-  margin-top: 60vh; /* Start the indicator at 60% of the screen */
-  width: 3px;
+  margin-top: 60vh;
+  width: var(--timeline-line-width);
   height: 80px;
-  background: #ff9400;
+  background: var(--color-accent);
   border-radius: 2px;
-  margin-bottom: 0.5rem;
-  opacity: 1;
+  margin-bottom: 1vh;
 }
 
 .scroll-text {
-  color: #ff9400;
-  font-family: 'Roboto', Arial, sans-serif;
+  color: var(--color-accent);
   font-size: 1.1rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  opacity: 1;
   writing-mode: vertical-lr;
-  text-align: center;
+  transform: rotate(180deg);
   user-select: none;
-  margin-bottom: 0.75rem; /* Increased spacing below "scroll" */
-  transform: rotate(180deg); /* Flip the text orientation */
-
+  margin-bottom: 0.75rem;
 }
 
-/* New: the line that extends from below the word "scroll" to the bottom */
 .scroll-line-extend {
   position: fixed;
-  left: 12.5vw; /* Match the indicator */
-  width: 3px;
-  background: #ff9400;
+  left: var(--timeline-x);
+  width: var(--timeline-line-width);
+  background: var(--color-accent);
   border-radius: 2px;
-  opacity: 1;
   z-index: 99;
   pointer-events: none;
-  margin-top: 1rem; /* Add this line for spacing */
-
+  margin-top: 1rem;
 }
 
-.second-screen {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #252525;
-  z-index: 10;
-  transition: transform 0.6s cubic-bezier(.77,0,.18,1);
-  transform: translateY(0); /* Start in place */
-}
-
-.mouse-icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 0.5rem;
-  color: #ff9400;
-}
-.mouse-icon svg {
-  display: block;
-  width: 24px;
-  height: 36px;
-}
-
-/* Bubble and circle on scroll line extend */
-.scroll-bubble-container {
-  position: absolute;        /* Was fixed: now scoped to its section */
-  left: 12.5vw;              /* Align with vertical line */
+/* Timeline labels */
+.timeline-label-left,
+.timeline-label-right {
+  position: absolute;
+  left: var(--timeline-x);
   display: flex;
   align-items: center;
-  z-index: 200;
+  gap: 0;
   pointer-events: none;
+  z-index: 200;
+  top: var(--timeline-label-offset);
 }
 
-/* Section‑specific vertical placement */
-.second-screen .grad-research-bubble {
-  top: 10vh;
-}
-.third-screen  .personal-project-bubble {
-  top: 30vh;                 /* Adjust as desired */
+.timeline-label-left {
+  transform: translateX(0);
 }
 
-/* Circle */
-.scroll-bubble-circle {
-  width: 18px;
-  height: 18px;
-  background: #ff9400;
+.timeline-label-left .circle,
+.timeline-label-right .circle {
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  border: 3px solid #ff9400;
-  box-shadow: 0 0 0 2px #ff9400;
-  margin-left: -7px;         /* Adjust to center over 3px line (tweak if needed) */
-  box-sizing: border-box;
-  z-index: 201;
+  background: var(--color-accent);
+  border: 3px solid var(--color-accent);
+  box-shadow: 0 0 0 2px var(--color-accent);
 }
 
-/* Text */
-.scroll-bubble-text {
+.timeline-label-left .circle {
+  transform: translateX(calc(50% - var(--timeline-line-half)));
+}
+
+.timeline-label-right .circle {
+  transform: translateX(calc(-50% + var(--timeline-line-half)));
+}
+
+.timeline-label-left .label-text,
+.timeline-label-right .label-text {
+  pointer-events: auto;
   background: transparent;
-  color: #ff9400;
-  font-family: 'Roboto', Arial, sans-serif;
-  font-size: 1rem;
-  border: 2px solid #ff9400;
+  color: var(--color-accent);
+  border: 2px solid var(--color-accent);
   border-radius: 16px;
   padding: 0.4em 1em;
-  margin-left: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   white-space: nowrap;
-  z-index: 201;
-  pointer-events: auto;
+  font: 1rem 'Roboto', Arial, sans-serif;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-left: 0;
+  margin-right: 0;
 }
 
-.grad-research-content {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start; /* Align to the left */
-  height: 100vh;
+/* ====================================
+   SHARED SCREEN STRUCTURE
+==================================== */
+.screen {
+  position: relative;
   width: 100vw;
+  box-sizing: border-box;
+}
+
+.screen-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--screen-gap);
+  padding-top: var(--screen-vertical-pad);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Footer link */
+.screen-link {
+  position: absolute;
+  bottom: var(--screen-footer-offset);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+  text-decoration: none;
+  border: 2px solid var(--color-accent);
+  padding: 0.55em 1.2em;
+  border-radius: 24px;
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(3px);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  pointer-events: auto;
+  z-index: 210;
+}
+
+.screen-link:hover {
+  background: var(--color-accent);
+  color: #111;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+}
+
+/* ====================================
+   SECOND & THIRD SCREENS (VERTICAL STACK)
+==================================== */
+.second-screen {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: var(--color-bg-dark-1);
+  z-index: 10;
+}
+
+.third-screen {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: var(--color-bg-dark-2);
+  z-index: 10;
+  overflow: hidden;
+}
+
+.grad-research-content,
+.osrs-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--screen-gap);
+  height: 100%;
+  width: 100%;
   position: relative;
   z-index: 1;
 }
 
-.grad-research-textbox {
-  flex: 1 1 50%;
-  max-width: 40vw;
-  min-width: 250px;
-  margin-left: calc(12.5vw + 16px); /* Add buffer for scroll bubble */
-  margin-right: 2vw;
-  background: transparent;
-  color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
-  padding: 2rem 2rem;
-  font-family: 'Roboto', Arial, sans-serif;
-  box-sizing: border-box;
-  font-size: 1.25rem;      /* Increase font size */
-  text-align: justify;     /* Full justify the text */
-  margin-top: 6vh; 
+.grad-research-imagebox,
+.osrs-imagebox {
+  position: relative;
+  width: var(--screen-max-width);
+  max-height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.grad-research-imagebox {
-  position: absolute;       /* Center on right half; adjust to your layout */
-  right: 5vw;
-  top: 50%;
-  transform: translateY(-50%);
-  width: min(40vw, 900px);  /* This defines how big the image AND video will be */
-  max-height: 70vh;         /* Prevents it from getting too tall */
+.grad-research-textbox,
+.osrs-textbox {
+  width: 100%;
+  max-width: var(--textbox-max-width);
+  background: var(--textbox-bg);
+  color: var(--textbox-color);
+  padding: var(--textbox-padding-y) var(--textbox-padding-x);
+  border-radius: var(--textbox-radius);
+  box-shadow: var(--textbox-shadow);
+  font-size: var(--textbox-font-size-lg);
+  text-align: justify;
+  max-height: var(--textbox-max-height);
+  overflow-y: hidden;
+  
 }
 
+.osrs-textbox {
+  font-size: var(--textbox-font-size);
+}
+
+/* ====================================
+   MEDIA FRAMES
+==================================== */
 .media-frame {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;     /* Keeps a consistent frame height without relying on content */
+  aspect-ratio: var(--media-aspect-ratio);
   border-radius: 16px;
   box-shadow: 0 2px 16px rgba(0,0,0,0.12);
   overflow: hidden;
   background: transparent;
 }
 
-/* The cover image and the iframe both fill the same frame */
 .media-cover,
 .media-frame iframe {
   position: absolute;
-  inset: 0;                 /* top:0; right:0; bottom:0; left:0 */
+  inset: 0;
   width: 100%;
   height: 100%;
   display: block;
   border: 0;
   border-radius: 16px;
-  object-fit: contain;      /* Match how your image fits; use 'cover' if you prefer */
+  object-fit: contain;
 }
 
-/* Play button overlay */
+.osrs-imagebox .media-frame:hover .media-cover {
+  filter: brightness(1.05);
+}
+
 .play-button {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(255, 148, 0, 0.9);
+  background: rgba(var(--color-accent-rgba), 0.9);
   color: #fff;
   border: none;
   border-radius: 50%;
-  width: 64px;
-  height: 64px;
+  width: var(--play-button-size);
+  height: var(--play-button-size);
   font-size: 2.5rem;
   cursor: pointer;
   display: flex;
@@ -277,94 +369,27 @@ body {
   box-shadow: 0 2px 8px rgba(0,0,0,0.18);
   transition: background 0.2s;
   z-index: 2;
-  opacity: 0.65; /* Slightly transparent when not hovered */;
-}
-.play-button:hover { background: #ff9400; }
-/* ========== THIRD SCREEN STYLES (OSRS Fishing Bot) ========== */
-.third-screen {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  background: #1e1e1e;
-  z-index: 10;
-  overflow: hidden;
-  transform: translateY(0); /* Added: creates containing block so fixed bubble behaves like on second screen */
+  opacity: 0.65;
 }
 
-/* Layout container similar to .grad-research-content */
-.osrs-content {
+.play-button:hover {
+  background: var(--color-accent);
+  opacity: 1;
+}
+
+/* ====================================
+   MISC
+==================================== */
+.mouse-icon {
   display: flex;
-  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-start;
-  height: 100%;
-  width: 100%;
-  position: relative;
-  z-index: 1;
+  margin-bottom: 0.5rem;
+  color: var(--color-accent);
 }
 
-/* Text box aligned from the vertical guide line with same spacing logic */
-.osrs-textbox {
-  flex: 1 1 50%;
-  max-width: 42vw;                 /* Slightly wider than grad box if desired */
-  min-width: 260px;
-  margin-left: calc(12.5vw + 16px);/* Align to vertical line + buffer */
-  margin-right: 2vw;
-  background: transparent;
-  color: #ffffff;
-  padding: 2rem 2rem;
-  font-family: 'Roboto', Arial, sans-serif;
-  box-sizing: border-box;
-  font-size: 1.15rem;
-  text-align: justify;
-  margin-top: 6vh;                 /* Vertical spacing from bubble area */
-  border-radius: 16px;
-  /* Optional subtle outline: */
-  /* outline: 1px solid rgba(255,255,255,0.08); */
+.mouse-icon svg {
+  width: 24px;
+  height: 36px;
 }
 
-/* Image / video container on right half mirroring grad section */
-.osrs-imagebox {
-  position: absolute;
-  right: 5vw;
-  top: 50%;
-  transform: translateY(-50%);
-  width: min(40vw, 900px);
-  max-height: 70vh;
-}
-
-/* Reuse .media-frame, .media-cover, .play-button from earlier definitions.
-   No duplication needed. If you want a variant, add a modifier here. */
-
-/* OPTIONAL: Slight tint when hovering pre-play */
-.osrs-imagebox .media-frame:hover .media-cover {
-  filter: brightness(1.05);
-}
-
-/* Hide both bubbles by default */
-.grad-research-bubble,
-.personal-project-bubble {
-  display: none;
-}
-
-/* Show Graduate Research bubble only when .second-screen is in view */
-.second-screen .grad-research-bubble {
-  display: flex;
-  position: fixed;
-  left: 12.5vw;
-  top: 10vh;
-  z-index: 200;
-  align-items: center;
-  pointer-events: none;
-}
-
-/* Show Personal Project bubble only when .third-screen is in view */
-.third-screen .personal-project-bubble {
-  display: flex;
-  position: fixed;
-  left: 12.5vw;
-  top: 30vh; /* Adjust as needed */
-  z-index: 200;
-  align-items: center;
-  pointer-events: none;
-}
