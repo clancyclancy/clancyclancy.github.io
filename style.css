@@ -20,7 +20,7 @@
   --textbox-radius: 16px;
   --textbox-bg: transparent;
   --textbox-color: #ffffff;
-  --textbox-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  --textbox-shadow: 0 2px 16px rgba(0,0,0,0);
   --textbox-font-size-lg: 1.25rem;
   --textbox-font-size: 1.15rem;
   --textbox-max-height: 20vh;
@@ -58,7 +58,7 @@ html, body {
 }
 
 body {
-  min-height: 400vh; /* enough scroll for 4 screens */
+  min-height: 600vh; /* enough scroll for 6 screens */
   min-width: 100vw;
 }
 
@@ -261,7 +261,8 @@ body {
 /* ====================================
    SCREENS (VERTICAL STACK)
 ==================================== */
-.osrs-screen {
+.osrs-screen,
+.charcoal-screen {
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -270,7 +271,8 @@ body {
 }
 
 .grad-screen,
-.art-screen {
+.art-screen,
+.chessai-screen {
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -281,7 +283,9 @@ body {
 
 .grad-research-content,
 .osrs-content,
-.art-content {
+.art-content,
+.charcoal-content,
+.chessai-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -295,19 +299,23 @@ body {
 
 .grad-research-imagebox,
 .osrs-imagebox,
-.art-imagebox {
+.art-imagebox,
+.charcoal-imagebox,
+.chessai-imagebox {
   position: relative;
   width: var(--screen-max-width);
   max-height: 75vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  color:transparent;
+  color: transparent;
 }
 
 .grad-research-textbox,
 .osrs-textbox,
-.art-textbox {
+.art-textbox,
+.charcoal-textbox,
+.chessai-textbox {
   width: 100%;
   max-width: var(--textbox-max-width);
   background: var(--textbox-bg);
@@ -319,7 +327,6 @@ body {
   text-align: justify;
   max-height: var(--textbox-max-height);
   overflow-y: hidden;
-  
 }
 
 .osrs-textbox {
@@ -385,9 +392,11 @@ body {
 /* ====================================
    ART GALLERY
 ==================================== */
-.art-gallery {
+.art-gallery,
+.charcoal-gallery {
   position: relative;
   width: var(--screen-max-width);
+  /* clamp keeps gallery responsive while staying within bounds */
   height: clamp(260px, 80vh, 740px);
   display: flex;
   overflow: hidden;
@@ -396,14 +405,16 @@ body {
   background: #000;
 }
 
-.art-gallery__cols {
+.art-gallery__cols,
+.charcoal-gallery__cols {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   width: 100%;
   height: 100%;
 }
 
-.art-gallery__cols img {
+.art-gallery__cols img,
+.charcoal-gallery__cols img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -414,7 +425,8 @@ body {
   padding: 0;
 }
 
-.art-gallery__nav {
+.art-gallery__nav,
+.charcoal-gallery__nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -433,22 +445,27 @@ body {
   transition: background 0.2s, color 0.2s;
 }
 
-.art-gallery__nav--prev { left: 0; }
-.art-gallery__nav--next { right: 0; }
+.art-gallery__nav--prev,
+.charcoal-gallery__nav--prev { left: 0; }
+.art-gallery__nav--next,
+.charcoal-gallery__nav--next { right: 0; }
 
-.art-gallery__nav:hover {
+.art-gallery__nav:hover,
+.charcoal-gallery__nav:hover {
   background: rgba(var(--color-accent-rgba), 0.85);
   color: #111;
 }
 
 @media (max-width: 900px) {
-  .art-gallery {
+  .art-gallery,
+  .charcoal-gallery {
     height: clamp(200px, 50vh, 500px);
   }
 }
 
 @media (max-width: 650px) {
-  .art-gallery__nav {
+  .art-gallery__nav,
+  .charcoal-gallery__nav {
     width: 48px;
     height: 60px;
     font-size: 2rem;

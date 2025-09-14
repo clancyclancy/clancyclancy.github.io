@@ -1,18 +1,16 @@
-<!--in the art-screen section. I do not want a single image. I want a three-column layout that displays pictures with no spacing between them that shows picture A, B, C, and when the user clicks an arrow on the left of right side of the three-colum layout, the pictures progress, now showing picture B, C, D. and so on, wrapping around back around to picture A. -->
-
 <!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Triangulated Navy Mesh</title>
+  <title>Michael Clancy Portfolio</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Background canvas -->
+  <!-- Canvas backdrop (animated triangulation) -->
   <canvas id="bg"></canvas>
 
   <!--  Content  -->
@@ -36,6 +34,7 @@
 </main>
 <div class="scroll-line-extend"></div>
 
+<!-- CGI / procedural artwork -->
 <section class="art-screen screen" data-screen="art">
   <div class="timeline-label-right screen-label">
     <div class="circle"></div>
@@ -60,7 +59,7 @@
   </div>
 </section>
 
-<!-- ===== MOVED: OSRS SECTION NOW COMES BEFORE GRAD SECTION ===== -->
+<!-- OSRS automation project -->
 <section class="osrs-screen screen" data-screen="personal-project">
   <div class="timeline-label-right screen-label">
     <div class="circle"></div>
@@ -88,7 +87,7 @@
     <div class="osrs-textbox screen__textbox" data-role="textbox">
       <p>
         This project automates gameplay loops in Runescape through leverage of real-time computer vision, template matching, A* pathfinding,
-        and a finite state machine. This is achieved without any code injection or memory reading. Up to 30 fps is achieved in Python on a laptop.
+        and a finite state machine. This is achieved without any code injection or memory reading.
       </p>
     </div>
   </div>
@@ -102,6 +101,7 @@
   </a>
 </section>
 
+<!-- Graduate research -->
 <section class="grad-screen screen" data-screen="graduate-research">
   <div class="timeline-label-right screen-label">
     <div class="circle"></div>
@@ -143,9 +143,73 @@
   </a>
 </section>
 
-  <!-- Delaunay triangulation library -->
-  <script src="https://unpkg.com/delaunator@5.0.0/delaunator.min.js"></script>
-  <!-- Animation -->
-  <script src="script.js"></script>
+<!-- Charcoal sketches -->
+<section class="charcoal-screen screen" data-screen="charcoal">
+  <div class="timeline-label-right screen-label">
+    <div class="circle"></div>
+    <div class="label-text">Sketches</div>
+  </div>
+  <div class="charcoal-content screen__inner">
+    <div class="charcoal-gallery screen__media" data-role="charcoal-gallery">
+      <button class="charcoal-gallery__nav charcoal-gallery__nav--prev" data-action="charcoal-prev" aria-label="Previous Art">&#10094;</button>
+      <div class="charcoal-gallery__cols">
+        <img data-slot="0" src="images/charcoal/0.png" alt="charcoal image 0" loading="lazy">
+        <img data-slot="1" src="images/charcoal/1.png" alt="charcoal image 1" loading="lazy">
+        <img data-slot="2" src="images/charcoal/2.png" alt="charcoal image 2" loading="lazy">
+      </div>
+      <button class="charcoal-gallery__nav charcoal-gallery__nav--next" data-action="charcoal-next" aria-label="Next charcoal">&#10095;</button>
+    </div>
+    <div class="charcoal-textbox screen__textbox" data-role="textbox">
+      <p>
+        Charcoal on canvas
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Chess AI (placeholder state) -->
+<section class="chessai-screen screen" data-screen="chessAI">
+  <div class="timeline-label-right screen-label">
+    <div class="circle"></div>
+    <div class="label-text">Chess AI - Pending</div>
+  </div>
+
+  <div class="chessai-content screen__inner">
+    <div class="chessai-imagebox screen__media">
+      <div class="media-frame media-frame--video" id="chessai-media" data-media="video">
+        <img
+          src="images/chess_ai/0.PNG"
+          alt="Chess AI Cover"
+          class="media-cover media-cover--image"
+          id="chessai-cover"
+          data-role="cover"
+        />
+        <button class="play-button media-play-button" id="chessai-play" aria-label="Play Chess AI Video" data-action="play-video">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <polygon points="10,7 29,18 10,29" fill="#fff"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="chessai-textbox screen__textbox" data-role="textbox">
+      <p>
+        Chess AI - Pending 
+      </p>
+    </div>
+  </div>
+
+  <a href=""
+     class="screen-link chessai-github-link screen__footer-link"
+     target="_blank"
+     rel="noopener"
+     data-link="github">
+    View Project on GitHub - Pending
+  </a>
+</section>
+
+<!-- External libs and main script -->
+<script src="https://unpkg.com/delaunator@5.0.0/delaunator.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
