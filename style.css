@@ -58,7 +58,7 @@ html, body {
 }
 
 body {
-  min-height: 300vh; /* enough scroll for 3 screens */
+  min-height: 400vh; /* enough scroll for 4 screens */
   min-width: 100vw;
 }
 
@@ -259,9 +259,9 @@ body {
 }
 
 /* ====================================
-   SECOND & THIRD SCREENS (VERTICAL STACK)
+   SCREENS (VERTICAL STACK)
 ==================================== */
-.second-screen {
+.osrs-screen {
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -269,7 +269,8 @@ body {
   z-index: 10;
 }
 
-.third-screen {
+.grad-screen,
+.art-screen {
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -279,7 +280,8 @@ body {
 }
 
 .grad-research-content,
-.osrs-content {
+.osrs-content,
+.art-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -292,17 +294,20 @@ body {
 }
 
 .grad-research-imagebox,
-.osrs-imagebox {
+.osrs-imagebox,
+.art-imagebox {
   position: relative;
   width: var(--screen-max-width);
   max-height: 75vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  color:transparent;
 }
 
 .grad-research-textbox,
-.osrs-textbox {
+.osrs-textbox,
+.art-textbox {
   width: 100%;
   max-width: var(--textbox-max-width);
   background: var(--textbox-bg);
@@ -329,7 +334,7 @@ body {
   width: 100%;
   aspect-ratio: var(--media-aspect-ratio);
   border-radius: 16px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.12);
+  /* box-shadow: 0 2px 16px rgba(255, 0, 0, 1); */
   overflow: hidden;
   background: transparent;
 }
@@ -375,6 +380,79 @@ body {
 .play-button:hover {
   background: var(--color-accent);
   opacity: 1;
+}
+
+/* ====================================
+   ART GALLERY
+==================================== */
+.art-gallery {
+  position: relative;
+  width: var(--screen-max-width);
+  height: clamp(260px, 80vh, 740px);
+  display: flex;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.35);
+  background: #000;
+}
+
+.art-gallery__cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  height: 100%;
+}
+
+.art-gallery__cols img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  margin: 0;
+  padding: 0;
+}
+
+.art-gallery__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: rgba(0,0,0,0.35);
+  color: var(--color-accent);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  width: 56px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s, color 0.2s;
+}
+
+.art-gallery__nav--prev { left: 0; }
+.art-gallery__nav--next { right: 0; }
+
+.art-gallery__nav:hover {
+  background: rgba(var(--color-accent-rgba), 0.85);
+  color: #111;
+}
+
+@media (max-width: 900px) {
+  .art-gallery {
+    height: clamp(200px, 50vh, 500px);
+  }
+}
+
+@media (max-width: 650px) {
+  .art-gallery__nav {
+    width: 48px;
+    height: 60px;
+    font-size: 2rem;
+  }
 }
 
 /* ====================================

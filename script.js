@@ -212,6 +212,47 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ===== ART GALLERY (3-COLUMN CYCLER) =====
+  (function initArtGallery() {
+    const gallery = document.querySelector('[data-role="art-gallery"]');
+    if (!gallery) return;
+
+    // Set to total number of art images you have (0.png ... N.png)
+    const ART_IMAGE_COUNT = 10; // <--- ADJUST THIS
+    const artImages = Array.from({ length: ART_IMAGE_COUNT }, (_, i) => `images/art/${i}.png`);
+
+    let startIndex = 0;
+    const slots = gallery.querySelectorAll('[data-slot]');
+    const prevBtn = gallery.querySelector('[data-action="art-prev"]');
+    const nextBtn = gallery.querySelector('[data-action="art-next"]');
+
+    function render() {
+      if (artImages.length === 0) return;
+      slots.forEach((img, offset) => {
+        const idx = (startIndex + offset) % artImages.length;
+        img.src = artImages[idx];
+        img.alt = `Art image ${idx}`;
+        img.dataset.index = idx;
+      });
+    }
+
+    function step(delta) {
+      startIndex = (startIndex + delta + artImages.length) % artImages.length;
+      render();
+    }
+
+    prevBtn?.addEventListener('click', () => step(-1));
+    nextBtn?.addEventListener('click', () => step(1));
+
+    // Optional: arrow key navigation when gallery in view
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') step(-1);
+      else if (e.key === 'ArrowRight') step(1);
+    });
+
+    render();
+  })();
+
   // ====== ANIMATION LOOP ======
 
 function step() {

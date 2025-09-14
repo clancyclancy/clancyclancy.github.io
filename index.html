@@ -1,3 +1,5 @@
+<!--in the art-screen section. I do not want a single image. I want a three-column layout that displays pictures with no spacing between them that shows picture A, B, C, and when the user clicks an arrow on the left of right side of the three-colum layout, the pictures progress, now showing picture B, C, D. and so on, wrapping around back around to picture A. -->
+
 <!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
@@ -33,52 +35,33 @@
   </div>
 </main>
 <div class="scroll-line-extend"></div>
-<section class="second-screen screen" data-screen="graduate-research">
+
+<section class="art-screen screen" data-screen="art">
   <div class="timeline-label-right screen-label">
     <div class="circle"></div>
-    <div class="label-text">Graduate Research</div>
+    <div class="label-text">CGI Art</div>
   </div>
-
-  <!-- Added generic structural class screen__inner (keeps original class) -->
-  <div class="grad-research-content screen__inner">
-    <!-- Media wrapper gets uniform class screen__media (original kept) -->
-    <div class="grad-research-imagebox screen__media">
-      <div class="media-frame media-frame--video" id="grad-media" data-media="video">
-        <img
-          src="images/graduate_research/0.PNG"
-          alt="Graduate Research Cover"
-          class="media-cover media-cover--image"
-          id="grad-cover"
-          data-role="cover"
-        />
-        <button class="play-button media-play-button" id="grad-play" aria-label="Play Graduate Research Video" data-action="play-video">
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-            <polygon points="10,7 29,18 10,29" fill="#fff"/>
-          </svg>
-        </button>
+  <div class="art-content screen__inner">
+    <div class="art-gallery screen__media" data-role="art-gallery">
+      <button class="art-gallery__nav art-gallery__nav--prev" data-action="art-prev" aria-label="Previous Art">&#10094;</button>
+      <div class="art-gallery__cols">
+        <img data-slot="0" src="images/art/0.png" alt="Art image 0" loading="lazy">
+        <img data-slot="1" src="images/art/1.png" alt="Art image 1" loading="lazy">
+        <img data-slot="2" src="images/art/2.png" alt="Art image 2" loading="lazy">
       </div>
+      <button class="art-gallery__nav art-gallery__nav--next" data-action="art-next" aria-label="Next Art">&#10095;</button>
     </div>
-
-    <!-- Text box unified class screen__textbox -->
-    <div class="grad-research-textbox screen__textbox" data-role="textbox">
+    <div class="art-textbox screen__textbox" data-role="textbox">
       <p>
-        Upper leg fractures are serious injuries with long recoveries and frequent complications.
-        My research contributed to the development of Robossis, a robotic system built to assist surgeons in femur repair.
+        Algorithms: Delauney triangulation, Lorenz, Lindenmayer, Slime Mold Simulation, Perlin Noise.
+        <br>Software: Python
       </p>
     </div>
   </div>
-
-  <!-- Footer link unified class screen__footer-link -->
-  <a href="files/JMR-23-1106.pdf"
-     class="screen-link grad-paper-link screen__footer-link"
-     target="_blank"
-     rel="noopener"
-     data-link="pdf">
-    Open Published Paper (PDF)
-  </a>
 </section>
 
-<section class="third-screen screen" data-screen="personal-project">
+<!-- ===== MOVED: OSRS SECTION NOW COMES BEFORE GRAD SECTION ===== -->
+<section class="osrs-screen screen" data-screen="personal-project">
   <div class="timeline-label-right screen-label">
     <div class="circle"></div>
     <div class="label-text">Personal Project</div>
@@ -116,6 +99,47 @@
      rel="noopener"
      data-link="github">
     View Project on GitHub
+  </a>
+</section>
+
+<section class="grad-screen screen" data-screen="graduate-research">
+  <div class="timeline-label-right screen-label">
+    <div class="circle"></div>
+    <div class="label-text">Graduate Research</div>
+  </div>
+
+  <div class="grad-research-content screen__inner">
+    <div class="grad-research-imagebox screen__media">
+      <div class="media-frame media-frame--video" id="grad-media" data-media="video">
+        <img
+          src="images/graduate_research/0.PNG"
+          alt="Graduate Research Cover"
+          class="media-cover media-cover--image"
+          id="grad-cover"
+          data-role="cover"
+        />
+        <button class="play-button media-play-button" id="grad-play" aria-label="Play Graduate Research Video" data-action="play-video">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <polygon points="10,7 29,18 10,29" fill="#fff"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="grad-research-textbox screen__textbox" data-role="textbox">
+      <p>
+        Upper leg fractures are serious injuries with long recoveries and frequent complications.
+        My research contributed to the development of Robossis, a robotic system built to assist surgeons in femur repair.
+      </p>
+    </div>
+  </div>
+
+  <a href="files/JMR-23-1106.pdf"
+     class="screen-link grad-paper-link screen__footer-link"
+     target="_blank"
+     rel="noopener"
+     data-link="pdf">
+    Open Published Paper (PDF)
   </a>
 </section>
 
