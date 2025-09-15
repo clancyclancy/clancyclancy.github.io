@@ -220,7 +220,7 @@ window.addEventListener('DOMContentLoaded', () => {
   (function initCharcoalGallery() {
     const gallery = document.querySelector('[data-role="charcoal-gallery"]');
     if (!gallery) return;
-    const CHARCOAL_IMAGE_COUNT = 6;
+    const CHARCOAL_IMAGE_COUNT = 3;
     const images = Array.from({ length: CHARCOAL_IMAGE_COUNT }, (_, i) => `images/charcoal/${i}.png`);
     let startIndex = 0;
     const slots = gallery.querySelectorAll('[data-slot]');
