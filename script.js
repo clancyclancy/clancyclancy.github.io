@@ -45,7 +45,7 @@ window.addEventListener('DOMContentLoaded', () => {
   if (chessAIFrame && chessAICover && chessAIPlay) {
     chessAIPlay.addEventListener('click', () => {
       const iframe = document.createElement('iframe');
-      iframe.src = 'https://www.youtube.com/embed/VIDEO_ID?autoplay=1&rel=0&vq=hd1080&playsinline=1';
+      iframe.src = 'https://www.youtube.com/embed/TBvqNnKA1VA?autoplay=1&rel=0&vq=hd1080&playsinline=1';
       iframe.title = 'Chess AI Video';
       iframe.allow = 'autoplay; encrypted-media';
       iframe.allowFullscreen = true;
