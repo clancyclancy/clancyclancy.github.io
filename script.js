@@ -38,7 +38,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Chess AI placeholder video embed
+  // Chess AI video embed
   const chessAIFrame = document.getElementById('chessai-media');
   const chessAICover = document.getElementById('chessai-cover');
   const chessAIPlay  = document.getElementById('chessai-play');
@@ -54,6 +54,23 @@ window.addEventListener('DOMContentLoaded', () => {
       chessAIPlay.style.display = 'none';
     });
   }
+
+  // Twitter Bot video embed
+  const aiDetectorFrame = document.getElementById('aiDetector-media');
+  const aiDetectorCover = document.getElementById('aiDetector-cover');
+  const aiDetectorPlay  = document.getElementById('aiDetector-play');
+  if (aiDetectorFrame && aiDetectorCover && aiDetectorPlay) {
+    aiDetectorPlay.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube.com/embed/Y2cGZP8gjnA?autoplay=1&rel=0&vq=hd1080&playsinline=1';
+      iframe.title = 'Twitter Bot Video';
+      iframe.allow = 'autoplay; encrypted-media';
+      iframe.allowFullscreen = true;
+      aiDetectorFrame.appendChild(iframe);
+      aiDetectorCover.style.display = 'none';
+      aiDetectorPlay.style.display = 'none';
+    });
+  }  
 
   // Scroll line sizing
   const canvas = document.getElementById("bg");

@@ -58,7 +58,7 @@ html, body {
 }
 
 body {
-  min-height: 600vh; /* enough scroll for 6 screens */
+  min-height: 700vh; /* enough scroll for all 7 screens TODO: update this every time a new screen is added */ 
   min-width: 100vw;
 }
 
@@ -288,7 +288,8 @@ body {
    SCREENS (VERTICAL STACK)
 ==================================== */
 .osrs-screen,
-.charcoal-screen {
+.charcoal-screen,
+.aiDetector-screen{
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -311,7 +312,8 @@ body {
 .osrs-content,
 .art-content,
 .charcoal-content,
-.chessai-content {
+.chessai-content,
+.aiDetector-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -327,7 +329,8 @@ body {
 .osrs-imagebox,
 .art-imagebox,
 .charcoal-imagebox,
-.chessai-imagebox {
+.chessai-imagebox,
+.aiDetector-imagebox {
   position: relative;
   width: var(--screen-max-width);
   max-height: 75vh;
@@ -341,7 +344,8 @@ body {
 .osrs-textbox,
 .art-textbox,
 .charcoal-textbox,
-.chessai-textbox {
+.chessai-textbox,
+.aiDetector-textbox {
   width: 100%;
   max-width: var(--textbox-max-width);
   background: var(--textbox-bg);
@@ -384,7 +388,8 @@ body {
   object-fit: contain;
 }
 
-.osrs-imagebox .media-frame:hover .media-cover {
+.osrs-imagebox,
+.media-frame:hover .media-cover {
   filter: brightness(1.05);
 }
 
