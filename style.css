@@ -239,6 +239,12 @@ body {
   margin-right: 0;
 }
 
+/* opaque backgrounds on labels */
+.osrs-screen, .charcoal-screen, .aiDetector-screen { --timeline-label-bg: var(--color-bg-dark-1); }
+.grad-screen, .art-screen, .chessai-screen { --timeline-label-bg: var(--color-bg-dark-2); }
+
+.timeline-label-right .label-text { background: var(--timeline-label-bg, transparent); color: var(--color-accent); }
+
 /* ====================================
    SHARED SCREEN STRUCTURE
 ==================================== */
